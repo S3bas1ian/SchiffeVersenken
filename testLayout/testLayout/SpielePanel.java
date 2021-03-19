@@ -76,7 +76,6 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 		versenkteSchiffe = client.getVersenkteSchiffe();
 		if (versenkteSchiffe != null) {
 
-			System.out.println(versenkteSchiffe.size());
 			for (Point[] t : versenkteSchiffe) {
 				g.setColor(Color.GREEN);
 				for (Point p : t) {
@@ -155,7 +154,7 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 				}
 				window.getSpielenMain().repaint();
 				// sidePanel.repaint();
-				// sp‰ter wird shots durch treffer und wasser ersetzt...
+				// sp√§ter wird shots durch treffer und wasser ersetzt...
 				// shots.add(currentSelectedField);
 			}
 		}
