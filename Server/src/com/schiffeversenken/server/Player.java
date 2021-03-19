@@ -6,7 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Player extends Thread {
 
@@ -97,6 +96,7 @@ public class Player extends Thread {
 
 	public void sendVersenkteSchiffe(ArrayList<Point[]> s) {
 		try {
+			System.out.println(s.size());
 			dataOutputStream.writeObject(s);
 			dataOutputStream.flush();
 		} catch (IOException e) {
@@ -144,19 +144,16 @@ public class Player extends Thread {
 					for (Point[] element : getEnemy().getMeineSchiffe()) {
 						versenkt = true;
 						for (Point element2 : element) {
-							System.out.println(Arrays.asList(shots).contains(element2));
-							if (Arrays.asList(shots).contains(element2) == false) {
-								System.out.println(element2 + "   " + shots.get(0));
+							if (contains(shots, element2) == false) {
 								versenkt = false;
 							}
 						}
 
 						if (versenkt) {
-							System.out.println("versenkt");
 							versenkteSchiffe.add(element);
-
 						}
 					}
+					sendVersenkteSchiffe(versenkteSchiffe);
 
 					if (treffer) {
 						trefferCounter++;
@@ -189,6 +186,16 @@ public class Player extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private boolean contains(ArrayList<Point> s, Point p) {
+		boolean b = false;
+		for (Point element : s) {
+			if (element.equals(p)) {
+				b = true;
+			}
+		}
+		return b;
 	}
 
 	private void beenden() {
