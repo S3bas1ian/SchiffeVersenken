@@ -29,6 +29,7 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 	private Point currentSelectedField;
 	private ArrayList<Point> treffer = new ArrayList<>();
 	private ArrayList<Point> wasser = new ArrayList<>();
+	private ArrayList<Point[]> versenkteSchiffe = new ArrayList<>();
 
 	public SpielePanel(Window window) {
 		this.window = window;
@@ -69,6 +70,19 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 			g.setColor(Color.blue);
 			for (Point s : wasser) {
 				g.fillRect(s.x * WTH / DIM, s.y * WTH / DIM, WTH / DIM, WTH / DIM);
+			}
+		}
+
+		versenkteSchiffe = client.getVersenkteSchiffe();
+		if (versenkteSchiffe != null) {
+
+			System.out.println(versenkteSchiffe.size());
+			for (Point[] t : versenkteSchiffe) {
+				g.setColor(Color.GREEN);
+				for (Point p : t) {
+					g.drawLine(p.x * WTH / DIM + WTH / (2 * DIM), p.y * WTH / DIM, p.x * WTH / DIM + WTH / (2 * DIM),
+							(p.y + 1) * WTH / DIM);
+				}
 			}
 		}
 
@@ -123,8 +137,6 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
-		System.out.println(client.getVersenkteSchiffe());
 
 		if (client.getCurrentPlayerID().equals(client.getID())) {
 
