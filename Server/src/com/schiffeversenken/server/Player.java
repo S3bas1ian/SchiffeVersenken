@@ -73,7 +73,7 @@ public class Player extends Thread {
 	}
 
 	/**
-	 * überprüft ob Position Point in meineSchiffe enthalten ist
+	 * Ã¼berprÃ¼ft ob Position Point in meineSchiffe enthalten ist
 	 * 
 	 * @param point
 	 * @return true wenn Schiff "getroffen" wurde
@@ -96,7 +96,6 @@ public class Player extends Thread {
 
 	public void sendVersenkteSchiffe(ArrayList<Point[]> s) {
 		try {
-			System.out.println(s.size());
 			dataOutputStream.writeObject(s);
 			dataOutputStream.flush();
 		} catch (IOException e) {
@@ -166,9 +165,9 @@ public class Player extends Thread {
 						}
 					}
 
-					getEnemy().sendShip(p); // zuständig für Schussanzeige des Gegners
+					getEnemy().sendShip(p); // zustÃ¤ndig fÃ¼r Schussanzeige des Gegners
 					// auf bool bekommt Point
-					// Anschließend beim Gegner checken ob treffer und mit writeBoolean mitteilen ob
+					// AnschlieÃŸend beim Gegner checken ob treffer und mit writeBoolean mitteilen ob
 					// treffer oder nicht
 				}
 
