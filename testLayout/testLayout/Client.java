@@ -148,7 +148,7 @@ public class Client extends Thread {
 					enemyShoots.add((Point) obj);
 				} else if (obj.getClass().getName().equals("java.lang.String")) {
 					if (obj.equals("$enemy disconnected")) {
-						textChat.append("Gegner Disconnected");
+						textChat.append("Gegner Disconnected \n");
 						shouldRun = false;
 						dataIn.close();
 						dataOut.close();
@@ -156,7 +156,7 @@ public class Client extends Thread {
 						sleep(2500);
 						System.exit(0);
 					} else if (obj.equals("$gewonnen")) {
-						textChat.append("GEWONNEN");
+						textChat.append("GEWONNEN \n");
 					} else if (obj.equals("$enemywon")) {
 						textChat.setFont(new Font("Agency FB", Font.PLAIN, 30));
 						textChat.setForeground(Color.red);
@@ -170,6 +170,7 @@ public class Client extends Thread {
 					treffer = (boolean) obj;
 				} else if (obj.getClass().getName().equals("java.util.ArrayList")) {
 					versenkteSchiffe = (ArrayList<Point[]>) obj;
+					System.out.println("received versenkteSchiffe Client");
 				}
 
 			}
