@@ -17,7 +17,7 @@ public class Client extends Thread {
 	private Socket socket;
 	private ObjectInputStream dataIn;
 	private ObjectOutputStream dataOut;
-	private String id, ip;
+	private String id, ip, enemyPlayerId;
 	private int port;
 
 	private ArrayList<Point[]> meineSchiffe;
@@ -163,6 +163,8 @@ public class Client extends Thread {
 						textChat.append("verloren");
 						sleep(2500);
 						trennen();
+					} else if (((String) obj).split(" ")[0].equals("enemyPlayerID")) {
+						enemyPlayerId = ((String) obj).split(" ")[1];
 					} else {
 						currentPlayerID = (String) obj;
 					}
@@ -170,7 +172,6 @@ public class Client extends Thread {
 					treffer = (boolean) obj;
 				} else if (obj.getClass().getName().equals("java.util.ArrayList")) {
 					versenkteSchiffe = (ArrayList<Point[]>) obj;
-					System.out.println("received versenkteSchiffe Client");
 				}
 
 			}
@@ -184,6 +185,23 @@ public class Client extends Thread {
 
 	public void setTextChat(JTextArea textChat) {
 		this.textChat = textChat;
+	}
+
+	public String getEnemyPlayerID() {
+		if (enemyPlayerId != null) {
+			return enemyPlayerId;
+		} else {
+			try {
+				dataOut.writeObject(new String("$enemyPlayerID"));
+				dataOut.flush();
+				Thread.sleep(60);
+				return enemyPlayerId;
+
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
 	}
 
 	public ArrayList<Point[]> getVersenkteSchiffe() {
