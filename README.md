@@ -9,3 +9,5 @@ After you have started the Server you can play now with max. 2 Person on each Se
 
 
 The Code is fully written in Java and available in /testLayout (Launcher) and /Server
+
+Designmanagment and Graphicdesign made by Seri 
