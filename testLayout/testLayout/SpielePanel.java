@@ -137,12 +137,12 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-		if (client.getCurrentPlayerID().equals(client.getID())) {
+		if (client.getCurrentPlayerID().equals(client.getID()) && client.getEnemyPlayerID() != null) {
 
 			if (currentSelectedField != null) {
 				client.shoot(currentSelectedField);
 				try {
-					Thread.sleep(5);
+					Thread.sleep(80);
 				} catch (InterruptedException e1) {
 				}
 
@@ -154,7 +154,7 @@ public class SpielePanel extends JPanel implements MouseListener, MouseMotionLis
 				}
 				window.getSpielenMain().repaint();
 				// sidePanel.repaint();
-				// sp√§ter wird shots durch treffer und wasser ersetzt...
+				// sp‰ter wird shots durch treffer und wasser ersetzt...
 				// shots.add(currentSelectedField);
 			}
 		}
