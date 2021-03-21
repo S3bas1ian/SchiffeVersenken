@@ -73,7 +73,7 @@ public class Player extends Thread {
 	}
 
 	/**
-	 * Ã¼berprÃ¼ft ob Position Point in meineSchiffe enthalten ist
+	 * überprüft ob Position Point in meineSchiffe enthalten ist
 	 * 
 	 * @param point
 	 * @return true wenn Schiff "getroffen" wurde
@@ -128,12 +128,18 @@ public class Player extends Thread {
 					} else if (request.equals("$disconnect")) {
 						shouldRun = false;
 						beenden();
+					} else if (request.split(" ")[0].equals("$enemyPlayerID")) {
+						if (getEnemy() != null) {
+							dataOutputStream.writeObject(new String("enemyPlayerID " + getEnemy().getID()));
+							dataOutputStream.flush();
+						}
 					}
 					// Client fragt irgendwas in Form eines Strings an
 				} else if (obj.getClass().getName().equals("java.awt.Point")) {
 					Point p = (Point) obj;
 					shots.add(p);
 					boolean treffer = getEnemy().isShip(p);
+					// System.out.println("ID: " + id + " treffer: " + treffer);
 					dataOutputStream.writeObject(treffer);
 					dataOutputStream.flush();
 
@@ -165,9 +171,9 @@ public class Player extends Thread {
 						}
 					}
 
-					getEnemy().sendShip(p); // zustÃ¤ndig fÃ¼r Schussanzeige des Gegners
+					getEnemy().sendShip(p); // zuständig für Schussanzeige des Gegners
 					// auf bool bekommt Point
-					// AnschlieÃŸend beim Gegner checken ob treffer und mit writeBoolean mitteilen ob
+					// Anschließend beim Gegner checken ob treffer und mit writeBoolean mitteilen ob
 					// treffer oder nicht
 				}
 
