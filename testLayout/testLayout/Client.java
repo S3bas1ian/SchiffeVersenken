@@ -147,7 +147,6 @@ public class Client extends Thread {
 				if (obj.getClass().getName().equals("java.awt.Point")) {
 					enemyShoots.add((Point) obj);
 				} else if (obj.getClass().getName().equals("java.lang.String")) {
-					obj = obj;
 					if (obj.equals("$enemy disconnected")) {
 						textChat.append("Gegner Disconnected \n");
 						shouldRun = false;
